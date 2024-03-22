@@ -1,0 +1,17 @@
+netspaker_scan_job:
+    runs-on: ubuntu-20.04
+    steps:
+      # Starts actions with given inputs
+      - name: Start Netsparker Enterprise Scan
+        uses: netsparker/Netsparker-Cloud-GitHub-Actions@v0.1.0
+        id: netsparker-enterprise-scan-step
+        with:
+          website-id: '443578bd-9f0e-4382-2d1e-b13a02b2db8a'
+          scan-type: 'Incremental'
+          profile-id: '88182aef-0572-4347-0dec-b13b02217f17'
+          user-id: ${{ secrets.NETSPARKER_USER_ID }}
+          api-token: ${{ secrets.NETSPARKER_API_TOKEN }}
+          base-url: 'https://ca.netsparker.cloud'
+      # Displays output for action
+      - name: Display Scan Request Message
+        run: echo "${{ steps.netsparker-enterprise-scan-step.outputs.scan-message }}"
